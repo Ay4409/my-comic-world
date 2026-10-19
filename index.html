@@ -1,1 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#10101b">
+  <title>Shadow Comics | Read Your Next Adventure</title>
 
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #10101b;
+      color: #ffffff;
+    }
+
+    header {
+      padding: 20px;
+      background: #191927;
+      border-bottom: 2px solid #8b5cf6;
+    }
+
+    .logo {
+      color: #c4b5fd;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    header p {
+      color: #b9b9cc;
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .hero {
+      padding: 35px 20px;
+      text-align: center;
+      background: linear-gradient(145deg, #29204c, #10101b);
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #d1d1e0;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    .section h2 {
+      border-left: 4px solid #a78bfa;
+      padding-left: 10px;
+    }
+
+    .comic-card {
+      background: #1c1c2b;
+      border: 1px solid #33334a;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .cover {
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+      background: linear-gradient(135deg, #4c1d95, #111827);
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .comic-info {
+      padding: 16px;
+    }
+
+    .comic-info p {
+      color: #c5c5d5;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #243d32;
+      color: #86efac;
+      font-size: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    .chapters {
+      display: none;
+      padding-top: 15px;
+    }
+
+    .chapter {
+      background: #121220;
+      border: 1px solid #343449;
+      border-radius: 8px;
+      padding: 13px;
+      margin-top: 10px;
+    }
+
+    .chapter p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .free {
+      color: #86efac;
+    }
+
+    .locked {
+      color: #fbbf24;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      color: #a5a5b8;
+      font-size: 13px;
+      background: #191927;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">⚔️ SHADOW COMICS</div>
+    <p>Enter a world of action, power and adventure.</p>
+  </header>
+
+  <section class="hero">
+    <h1>Your Next Adventure Starts Here!</h1>
+    <p>
+      Discover original stories, legendary heroes
+      and unforgettable battles.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>🔥 Featured Comics</h2>
+
+    <div class="comic-card">
+
+      <div class="cover">
+        ⚔️<br>SHADOW WARRIOR
+      </div>
+
+      <div class="comic-info">
+        <span class="tag">ACTION & ADVENTURE</span>
+
+        <h3>Shadow Warrior</h3>
+
+        <p>
+          An ordinary boy discovers an ancient power
+          that could change his world forever.
+        </p>
+
+        <button onclick="toggleChapters()">
+          View Chapters
+        </button>
+
+        <div class="chapters" id="chapters">
+
+          <div class="chapter">
+            <strong>Chapter 1: The Awakening</strong>
+            <p class="free">FREE TO READ</p>
+            <p>Your adventure begins here.</p>
+            <br>
+            <button onclick="readChapter()">
+              Read Chapter 1
+            </button>
+          </div>
+
+          <div class="chapter">
+            <strong>Chapter 2: Hidden Power</strong>
+            <p class="locked">🔒 PREMIUM CHAPTER</p>
+            <p>Unlock this chapter to continue.</p>
+            <button onclick="premiumMessage()">
+              Unlock Chapter
+            </button>
+          </div>
+
+          <div class="chapter">
+            <strong>Chapter 3: The First Battle</strong>
+            <p class="locked">🔒 PREMIUM CHAPTER</p>
+            <p>The adventure continues.</p>
+            <button onclick="premiumMessage()">
+              Unlock Chapter
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Shadow Comics</p>
+    <p>Original stories. Unlimited adventures.</p>
+  </footer>
+
+  <script>
+    function toggleChapters() {
+      const chapters = document.getElementById("chapters");
+
+      if (chapters.style.display === "block") {
+        chapters.style.display = "none";
+      } else {
+        chapters.style.display = "block";
+      }
+    }
+
+    function readChapter() {
+      alert("Your free Chapter 1 page is coming soon!");
+    }
+
+    function premiumMessage() {
+      alert(
+        "Premium chapter purchases are coming soon! " +
+        "Payments are not enabled yet."
+      );
+    }
+  </script>
+
+</body>
+  </html>
