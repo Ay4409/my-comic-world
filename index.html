@@ -3,295 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080711">
-
-  <title>ASTRAVEN STUDIOS | Beyond Legend</title>
-
-  <meta name="description"
-    content="Enter the worlds of ASTRAVEN STUDIOS. Discover original comics, legendary heroes and extraordinary adventures.">
+  <title>ASTRAVEN STUDIOS</title>
 
   <style>
-    :root {
-      --background: #080711;
-      --surface: #121020;
-      --gold: #e8c779;
-      --purple: #9b70ff;
-      --text: #ffffff;
-      --muted: #b8b3ca;
-      --border: rgba(232, 199, 121, 0.25);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
-      background: var(--background);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .announcement {
+      font-family: Arial, sans-serif;
+      background: #0b0714;
+      color: white;
       text-align: center;
-      padding: 9px 12px;
-      background: #171126;
-      color: var(--gold);
-      font-size: 11px;
-      letter-spacing: 2px;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 6%;
-      border-bottom: 1px solid var(--border);
-      background: rgba(8, 7, 17, 0.97);
+      padding: 35px 15px;
+      background: #170d2b;
+      border-bottom: 2px solid #d4af37;
     }
 
-    .brand {
-      font-family: Georgia, serif;
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      color: var(--gold);
+    h1 {
+      color: #d4af37;
+      letter-spacing: 3px;
     }
 
-    .brand small {
-      display: block;
-      font-family: Arial, sans-serif;
-      font-size: 9px;
-      letter-spacing: 5px;
-      text-align: center;
-      color: white;
+    .tagline {
+      color: #c5b6e8;
     }
 
-    nav {
-      display: flex;
-      gap: 18px;
-      font-size: 12px;
-      color: var(--muted);
+    main {
+      padding: 30px 20px;
+      max-width: 650px;
+      margin: auto;
     }
 
-    nav a:hover {
-      color: var(--gold);
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 85px 7% 75px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 10%,
-          rgba(115, 56, 205, 0.35), transparent 55%),
-        radial-gradient(ellipse at 50% 100%,
-          rgba(188, 135, 54, 0.12), transparent 55%),
-        #080711;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      font-size: 11px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-    }
-
-    .hero h1 {
-      max-width: 850px;
-      margin: 22px auto 12px;
-      font-family: Georgia, serif;
-      font-size: clamp(37px, 9vw, 76px);
-      line-height: 1.08;
-      letter-spacing: 2px;
-    }
-
-    .hero h1 span {
-      color: var(--gold);
-    }
-
-    .hero p {
-      max-width: 520px;
-      margin: 18px auto 30px;
-      color: var(--muted);
-      font-size: 15px;
+    .comic {
+      margin-top: 25px;
+      padding: 25px 15px;
+      border: 1px solid #6e45a8;
+      border-radius: 12px;
+      background: #170d2b;
     }
 
     .button {
       display: inline-block;
-      padding: 14px 24px;
-      border: 1px solid var(--gold);
-      border-radius: 4px;
-      background: var(--gold);
-      color: #15101d;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 25px rgba(232, 199, 121, 0.2);
-    }
-
-    .button.secondary {
-      background: transparent;
-      color: var(--gold);
-    }
-
-    .section {
-      padding: 55px 6%;
-    }
-
-    .section-heading {
-      margin-bottom: 25px;
-    }
-
-    .section-heading span {
-      color: var(--purple);
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      margin: 5px 0;
-      font-family: Georgia, serif;
-      font-size: 31px;
-    }
-
-    .featured {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 25px;
-      padding: 20px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      background:
-        radial-gradient(ellipse at top right,
-          rgba(117, 68, 187, 0.16), transparent 60%),
-        var(--surface);
-    }
-
-    .comic-art {
-      min-height: 270px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 25px;
-      border: 1px solid rgba(232, 199, 121, 0.35);
+      padding: 12px 20px;
+      margin: 10px;
       border-radius: 6px;
-      background:
-        radial-gradient(circle at center,
-          rgba(125, 73, 226, 0.55), transparent 40%),
-        linear-gradient(145deg, #21143e, #090812 75%);
-    }
-
-    .comic-art .symbol {
-      color: var(--gold);
-      font-size: 75px;
-      line-height: 1.2;
-    }
-
-    .comic-art h3 {
-      margin: 12px 0 0;
-      font-family: Georgia, serif;
-      font-size: clamp(22px, 5vw, 35px);
-      line-height: 1.2;
-      letter-spacing: 2px;
-    }
-
-    .comic-art p {
-      color: var(--gold);
-      font-size: 10px;
-      letter-spacing: 3px;
-    }
-
-    .featured-info {
-      padding: 5px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
-      border: 1px solid rgba(155, 112, 255, 0.5);
-      border-radius: 3px;
-      color: #c6adff;
-      font-size: 10px;
-      letter-spacing: 1px;
-    }
-
-    .featured-info h3 {
-      margin: 15px 0 8px;
-      font-family: Georgia, serif;
-      font-size: 30px;
-      line-height: 1.2;
-    }
-
-    .featured-info > p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .chapter-list {
-      margin: 20px 0;
-    }
-
-    .chapter {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-      padding: 14px;
-      border: 1px solid #302942;
-      border-radius: 5px;
-      background: #0d0b18;
-    }
-
-    .chapter strong {
-      display: block;
-      font-size: 12px;
-    }
-
-    .chapter small {
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    .chapter-status {
-      flex-shrink: 0;
-      color: #91e7b0;
-      font-size: 10px;
+      background: #d4af37;
+      color: #10091b;
+      text-decoration: none;
       font-weight: bold;
     }
 
-    .chapter-status.locked {
-      color: var(--gold);
+    footer {
+      padding: 20px;
+      color: #b7a9ce;
+      font-size: 13px;
     }
+  </style>
+</head>
 
-    .chapter button {
-      margin-top: 7px;
-      padding: 7px 12px;
-      border: 1px solid var(--border);
-      border-radius:
+<body>
+
+  <header>
+    <h1>ASTRAVEN STUDIOS</h1>
+    <p class="tagline">Beyond Legend. Beyond Imagination.</p>
+  </header>
+
+  <main>
+    <h2>Welcome to Our Universe</h2>
+    <p>Discover new worlds, legendary heroes, and unforgettable adventures.</p>
+
+    <section class="comic">
+      <h2>GUARDIANS OF ELYSIUM</h2>
+      <p>An original action and adventure comic.</p>
+      <p><strong>Chapter 1: The Beginning</strong></p>
+      <p>Our heroes' journey starts here.</p>
+      <a class="button" href="mailto:astravenstudios@example.com?subject=Guardians%20of%20Elysium">
+        Contact the Studio
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 ASTRAVEN STUDIOS. All rights reserved.
+  </footer>
+
+</body>
+</html>
