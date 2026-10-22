@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0714">
   <title>ASTRAVEN STUDIOS</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -31,7 +36,7 @@
 
     main {
       padding: 30px 20px;
-      max-width: 650px;
+      max-width: 700px;
       margin: auto;
     }
 
@@ -43,15 +48,48 @@
       background: #170d2b;
     }
 
+    .comic-cover {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+    }
+
     .button {
       display: inline-block;
       padding: 12px 20px;
       margin: 10px;
+      border: none;
       border-radius: 6px;
       background: #d4af37;
       color: #10091b;
       text-decoration: none;
       font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .field {
+      display: block;
+      width: 100%;
+      max-width: 380px;
+      padding: 13px;
+      margin: 12px auto;
+      border: 1px solid #6e45a8;
+      border-radius: 6px;
+      background: #0b0714;
+      color: white;
+      font-size: 16px;
+    }
+
+    .field:focus {
+      outline: 2px solid #d4af37;
+    }
+
+    .status {
+      overflow-wrap: anywhere;
+      color: #c5b6e8;
+      line-height: 1.5;
     }
 
     footer {
@@ -63,7 +101,6 @@
 </head>
 
 <body>
-
   <header>
     <h1>ASTRAVEN STUDIOS</h1>
     <p class="tagline">Beyond Legend. Beyond Imagination.</p>
@@ -75,91 +112,151 @@
 
     <section class="comic">
       <img
-  src="file_00000000d59c820ea7bf0f17f2a96a73.png"
-  alt="Guardians of Elysium comic cover"
-  style="width:100%; max-width:400px; height:auto; border-radius:12px;"
->
+        class="comic-cover"
+        src="file_00000000d59c820ea7bf0f17f2a96a73.png"
+        alt="Guardians of Elysium comic cover"
+      >
+
       <h2>GUARDIANS OF ELYSIUM</h2>
       <p>An original action and adventure comic.</p>
       <p><strong>Chapter 1: The Beginning</strong></p>
       <p>Our heroes' journey starts here.</p>
-      <a class="button" href="mailto:astravenstudios@example.com?subject=Guardians%20of%20Elysium">
-        Contact the Studio
-      </a>
+      <p>More chapters are in development.</p>
+    </section>
+
+    <section class="comic">
+      <h2>Reader Account</h2>
+      <p>Create an account to join the ASTRAVEN STUDIOS community.</p>
+
+      <form id="signup-form">
+        <label for="username">Username</label>
+        <input
+          class="field"
+          id="username"
+          name="username"
+          type="text"
+          placeholder="Choose a username"
+          minlength="3"
+          maxlength="30"
+          autocomplete="username"
+          required
+        >
+
+        <label for="email">Email address</label>
+        <input
+          class="field"
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+
+        <label for="password">Password</label>
+        <input
+          class="field"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Create a password (at least 8 characters)"
+          minlength="8"
+          autocomplete="new-password"
+          required
+        >
+
+        <button class="button" id="signup-button" type="submit">
+          Create Account
+        </button>
+      </form>
+
+      <p id="account-message" class="status" role="status" aria-live="polite"></p>
     </section>
   </main>
 
   <footer>
     &copy; 2026 ASTRAVEN STUDIOS. All rights reserved.
   </footer>
-<script type="module">
-  import { createClient } from
-    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  const SUPABASE_URL = 'https://rxkcjekxxnrbekqkmlfo.supabase.co/rest/v1/';
-  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl';
+  <script type="module">
+    import { createClient } from
+      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  const supabase = createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+    const SUPABASE_URL = 'https://rxkcjekxxnrbekqkmlfo.supabase.co/rest/v1/';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl';
 
-  const form = document.getElementById('signup-form');
-  const message = document.getElementById('account-message');
+    const form = document.getElementById('signup-form');
+    const message = document.getElementById('account-message');
+    const button = document.getElementById('signup-button');
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    function showMessage(text) {
+      message.textContent = text;
+    }
 
-    const username = document.getElementById('username')
-      .value.trim();
-    const email = document.getElementById('email')
-      .value.trim();
-    const password = document.getElementById('password').value;
+    if (
+      SUPABASE_URL === 'https://rxkcjekxxnrbekqkmlfo.supabase.co/rest/v1/' ||
+      SUPABASE_PUBLISHABLE_KEY === 'sb_publishable_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl'
+    ) {
+      showMessage('The website form is ready, but its Supabase connection still needs to be configured.');
+    } else {
+      const supabase = createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
 
-    message.textContent = 'Creating your account...';
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
 
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { username },
-          emailRedirectTo: window.location.origin +
-            window.location.pathname
-        }
-      });
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
 
-      if (error) throw error;
-
-      if (data.user && data.session) {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert({
-            id: data.user.id,
-            username: username
-          });
-
-        if (profileError) {
-          console.error(profileError);
-          message.textContent =
-            'Your account was created, but your profile could not be saved. Please contact the studio.';
+        if (username.length < 3) {
+          showMessage('Your username must contain at least 3 characters.');
           return;
         }
 
-        message.textContent =
-          'Account created! Welcome to ASTRAVEN STUDIOS.';
-      } else {
-        message.textContent =
-          'Almost done! Check your email to confirm your account.';
-      }
+        button.disabled = true;
+        showMessage('Creating your account...');
 
-      form.reset();
-    } catch (error) {
-      console.error(error);
-      message.textContent =
-        error.message || 'Something went wrong. Please try again.';
+        try {
+          const { data, error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              data: { username },
+              emailRedirectTo: window.location.origin +
+                window.location.pathname
+            }
+          });
+
+          if (error) throw error;
+
+          if (data.user && !data.session) {
+            showMessage(
+              'Registration received! Check your email for a confirmation link. Your profile setup will be verified next.'
+            );
+          } else if (data.user && data.session) {
+            showMessage(
+              'Your account was created. We will verify profile setup before enabling your reader dashboard.'
+            );
+          } else {
+            showMessage(
+              'Please check your email for further instructions.'
+            );
+          }
+
+          form.reset();
+        } catch (error) {
+          console.error('Registration error:', error);
+          showMessage(
+            error.message || 'Registration failed. Please try again.'
+          );
+        } finally {
+          button.disabled = false;
+        }
+      });
     }
-  });
-</script>
+  </script>
 </body>
 </html>
