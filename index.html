@@ -200,8 +200,8 @@
       showMessage('The website form is ready, but its Supabase connection still needs to be configured.');
     } else {
       const supabase = createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
+        SUPABASE_URL === 'https://rxkcjekxxnrbekqkmlfo.supabase.co/rest/v1/' ||
+        SUPABASE_PUBLISHABLE_KEY === 'sb_publishable_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl'
       );
 
       form.addEventListener('submit', async (event) => {
