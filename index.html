@@ -176,93 +176,86 @@
   </footer>
 
   <script type="module">
-    import { createClient } from
-      'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+import { createClient } from
+'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-    // Replace these two values with your own Supabase project details.
-    const SUPABASE_URL = '=== 'https://rxkcjekxxnrbekqkmlfo.supabase.co/rest/v1/' ||';
-    const SUPABASE_PUBLISHABLE_KEY = '=== 'sb_publishable_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl'';
+// Supabase connection details
+const SUPABASE_URL = 'https://rxkcjekxxnrbekqkmlfo.supabase.co';
 
-    const form = document.getElementById('signup-form');
-    const message = document.getElementById('message');
-    const button = document.getElementById('signup-button');
+const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_EXISTING_PUBLISHABLE_KEY_HERE';
 
-    function showMessage(text) {
-      message.textContent = text;
+const supabase = createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+const form = document.getElementById('signup-form');
+const message = document.getElementById('message');
+const button = document.getElementById('signup-button');
+
+function showMessage(text) {
+  message.textContent = text;
+}
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const username =
+    document.getElementById('username').value.trim();
+
+  const email =
+    document.getElementById('email').value.trim();
+
+  const password =
+    document.getElementById('password').value;
+
+  if (username.length < 3) {
+    showMessage('Username must contain at least 3 characters.');
+    return;
+  }
+
+  button.disabled = true;
+  showMessage('Creating your account...');
+
+  try {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          username: username
+        },
+        emailRedirectTo:
+          'https://ay4409.github.io/my-comic-world/'
+      }
+    });
+
+    if (error) {
+      throw error;
     }
 
-    const configured =
-      SUPABASE_URL.startsWith('https://') &&
-      SUPABASE_URL.endsWith('supabase.co/rest/v1/') &&
-      SUPABASE_PUBLISHABLE_KEY.startsWith('sb_publishable_') &&
-      !SUPABASE_URL.includes('rxkcjekxxnrbekqkmlfo') &&
-      !SUPABASE_PUBLISHABLE_KEY.includes('_EKQDVEyapaSosO5K02AtAw_YCZ9Gvvl');
-
-    if (!configured) {
-      
+    if (data.user && !data.session) {
+      showMessage(
+        'Account created! Please check your email to confirm your account.'
       );
-      button.disabled = true;
+    } else if (data.user && data.session) {
+      showMessage(
+        'Your account was created successfully!'
+      );
     } else {
-      const supabase = createClient(
-      );
-
-      form.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const username =
-          document.getElementById('username').value.trim();
-        const email =
-          document.getElementById('email').value.trim();
-        const password =
-          document.getElementById('password').value;
-
-        if (username.length < 3) {
-          showMessage('Choose a username with at least 3 characters.');
-          return;
-        }
-
-        button.disabled = true;
-        showMessage('Creating your account...');
-
-        try {
-          const { data, error } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-              data: { username },
-              emailRedirectTo:
-                'https://ay4409.github.io/my-comic-world/'
-            }
-          });
-
-          if (error) throw error;
-
-          if (data.user && !data.session) {
-            showMessage(
-              'Registration started! Check your email for the confirmation link. If no email arrives, check spam.'
-            );
-          } else if (data.user && data.session) {
-            showMessage(
-              'Your account was created successfully!'
-            );
-          } else {
-            showMessage(
-              'Please check your email for further instructions.'
-            );
-          }
-
-          form.reset();
-        } catch (error) {
-          console.error('Supabase registration error:', error);
-
-          showMessage(
-            error.message || 'Registration failed. Please try again.'
-          );
-        } finally {
-          button.disabled = false;
-        }
-      });
+      showMessage('Please check your email for further instructions.');
     }
+
+    form.reset();
+
+  } catch (error) {
+    console.error('Registration error:', error);
+    showMessage(error.message || 'Registration failed. Please try again.');
+
+  } finally {
+    button.disabled = false;
+  }
+});
   </script>
 </body>
 </html>
