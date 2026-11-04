@@ -166,7 +166,29 @@
           Create Account
         </button>
       </form>
+<h3>Already have an account? Login</h3>
 
+<form id="login-form">
+  <label for="login-email">Email address</label>
+  <input
+    id="login-email"
+    type="email"
+    autocomplete="email"
+    required
+  >
+
+  <label for="login-password">Password</label>
+  <input
+    id="login-password"
+    type="password"
+    autocomplete="current-password"
+    required
+  >
+
+  <button class="button" id="login-button" type="submit">
+    Login
+  </button>
+</form>
       <p id="message" role="status" aria-live="polite"></p>
     </section>
   </main>
