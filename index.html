@@ -179,81 +179,89 @@
 import { createClient } from
 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// Supabase connection details
 const SUPABASE_URL = 'https://rxkcjekxxnrbekqkmlfo.supabase.co';
-
-const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_EXISTING_PUBLISHABLE_KEY_HERE';
+const SUPABASE_PUBLISHABLE_KEY = 'PASTE_YOUR_PUBLISHABLE_KEY_HERE';
 
 const supabase = createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
 
-const form = document.getElementById('signup-form');
 const message = document.getElementById('message');
-const button = document.getElementById('signup-button');
 
 function showMessage(text) {
   message.textContent = text;
 }
 
-form.addEventListener('submit', async (event) => {
+// CREATE ACCOUNT
+const signupForm = document.getElementById('signup-form');
+const signupButton = document.getElementById('signup-button');
+
+signupForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  const username =
-    document.getElementById('username').value.trim();
+  const username = document.getElementById('username').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
 
-  const email =
-    document.getElementById('email').value.trim();
-
-  const password =
-    document.getElementById('password').value;
-
-  if (username.length < 3) {
-    showMessage('Username must contain at least 3 characters.');
-    return;
-  }
-
-  button.disabled = true;
+  signupButton.disabled = true;
   showMessage('Creating your account...');
 
   try {
     const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+      email,
+      password,
       options: {
-        data: {
-          username: username
-        },
+        data: { username },
         emailRedirectTo:
           'https://ay4409.github.io/my-comic-world/'
       }
     });
 
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
 
     if (data.user && !data.session) {
-      showMessage(
-        'Account created! Please check your email to confirm your account.'
-      );
-    } else if (data.user && data.session) {
-      showMessage(
-        'Your account was created successfully!'
-      );
+      showMessage('Account created! Check your email to confirm it.');
     } else {
-      showMessage('Please check your email for further instructions.');
+      showMessage('Account created successfully!');
     }
 
-    form.reset();
+    signupForm.reset();
 
   } catch (error) {
-    console.error('Registration error:', error);
-    showMessage(error.message || 'Registration failed. Please try again.');
-
+    showMessage(error.message);
   } finally {
-    button.disabled = false;
+    signupButton.disabled = false;
+  }
+});
+
+// LOGIN
+const loginForm = document.getElementById('login-form');
+const loginButton = document.getElementById('login-button');
+
+loginForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+
+  loginButton.disabled = true;
+  showMessage('Logging in...');
+
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) throw error;
+
+    window.location.href = 'dashboard.html';
+
+  } catch (error) {
+    showMessage(error.message);
+  } finally {
+    loginButton.disabled = false;
   }
 });
   </script>
